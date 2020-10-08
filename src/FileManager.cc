@@ -1,27 +1,33 @@
 #include "FileManager.h"
 
-void FileManager::readBinFile(char* fileName, char* &buffer) {
-    std::ifstream inFile(fileName, std::ifstream::in | std::ifstream::binary);
+BinaryCode* FileManager::readBinFile(char* fileName) {
+    std::ifstream inFile(fileName, std::ifstream::binary);
 
     if (inFile.is_open()) {
-        inFile.seekg(0, std::ifstream::end);
-        size_t length = inFile.tellg();
-        inFile.seekg(0, std::ifstream::beg);
-        buffer = new char[length];
-        inFile.read(buffer, length);
+        BinaryCode* binaryCode = new BinaryCode();
+
+        while(!inFile.eof()) {
+            int instruction;
+            inFile.read((char *) &instruction, sizeof(int));
+            binaryCode->pushInstruction(instruction);
+        }
+
         inFile.close();
+        return binaryCode;
     } else {
         throw;
     }
 }
 
-void FileManager::writeTxtFile(char* fileName, char* text) {
+void FileManager::writeTxtFile(char* fileName, DisassembledData* disassembledData) {
+    std::string text = disassembledData->getDisassembledDataString();
+
     std::cout << text << std::endl;
 
     std::ofstream outFile(fileName);
 
     if (outFile.is_open()) {
-        outFile.write(text, strlen(text));
+        outFile.write(text.c_str(), text.length());
         outFile.close();
     } else {
         throw;

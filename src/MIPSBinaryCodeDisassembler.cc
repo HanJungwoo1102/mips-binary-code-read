@@ -1,12 +1,18 @@
 #include "MIPSBinaryCodeDisassembler.h"
 
-int MIPSBinaryCodeDisassembler::WORD_BIT_COUNT = 32;
+DisassembledData* MIPSBinaryCodeDisassembler::disassemble(BinaryCode* binaryCode) {
+	std::cout << std::endl;
+	DisassembledData* disassembledData = NULL;
 
-char* MIPSBinaryCodeDisassembler::disassemble(char* binary) {
-	int binaryLength = strlen(binary);
-	int wordBitCount = WORD_BIT_COUNT;
+	int binaryLength = binaryCode->getLength();
 
-	for (int instructionIndex = 0; instructionIndex * wordBitCount < binaryLength; instructionIndex++) {
-	}
-	return binary;
-}
+	std::vector<int>::iterator iterator = binaryCode->getInstructionIterator();
+	std::vector<int>::iterator lastIterator = binaryCode->getLastInstructionIterator();
+
+
+	for (; iterator != lastIterator ; ++iterator){
+        std::cout << std::hex << *iterator << std::endl;
+    }
+
+	return disassembledData;
+};

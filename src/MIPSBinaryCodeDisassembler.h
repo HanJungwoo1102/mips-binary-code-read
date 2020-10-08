@@ -1,9 +1,9 @@
 #include <iostream>
-#include "InstructionFactory.h"
+
+#include "BinaryCode.h"
+#include "DisassembledData.h"
 
 class MIPSBinaryCodeDisassembler {
-	private:
-		static int WORD_BIT_COUNT;
 	public:
-		static char* disassemble(char* fileName);
+		static DisassembledData* disassemble(BinaryCode* fileName);
 };

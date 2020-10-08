@@ -1,8 +1,11 @@
 #include <iostream>
 #include <fstream>
 
+#include "BinaryCode.h"
+#include "DisassembledData.h"
+
 class FileManager {
 	public:
-		static void readBinFile(char* fileName, char* &buffer);
-		static void writeTxtFile(char* fileName, char* text);
+		static BinaryCode* readBinFile(char* fileName);
+		static void writeTxtFile(char* fileName, DisassembledData* disassembledData);
 };

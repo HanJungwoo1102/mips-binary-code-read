@@ -1,31 +1,36 @@
 #include <iostream>
+
 #include "MIPSBinaryCodeDisassembler.h"
 #include "FileManager.h"
 
 int main(int argc, char **argv) {
     if (argc == 2) {
         char* binFileName = argv[1];
-        char* binaryCode = NULL;
-        char* disassembledText = NULL;
+        BinaryCode* binaryCode = NULL;
+        DisassembledData* disassembledData = NULL;
 
+        std::cout << "[1] Read: " << binFileName;
         try {
-            FileManager::readBinFile(binFileName, binaryCode);
+            binaryCode = FileManager::readBinFile(binFileName);
+            std::cout << " - (success)" << std::endl;
         } catch(int error) {
-            std::cout << "Fail to read a file" << std::endl;
+            std::cout << " - (fail)" << std::endl;
             return 0;
         }
-
+        std::cout << "[2] Disassemble";
         try {
-            disassembledText = MIPSBinaryCodeDisassembler::disassemble(binaryCode);
+            disassembledData = MIPSBinaryCodeDisassembler::disassemble(binaryCode);
+            std::cout << " - (success)" << std::endl;
         } catch(int error) {
-            std::cout << "Fail to disassemble" << std::endl;
+            std::cout << " - (fail)" << std::endl;
             return 0;
         }
-
+        std::cout << "[3] Write a file" << std::endl;
         try {
-            FileManager::writeTxtFile("test.txt", disassembledText);
+            FileManager::writeTxtFile("test.txt", disassembledData);
+            std::cout << " - (success)" << std::endl;
         } catch(int error) {
-            std::cout << "Fail to write a file" << std::endl;
+            std::cout << " - (fail)" << std::endl;
             return 0;
         }
         
