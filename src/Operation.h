@@ -43,6 +43,12 @@
 //     JFormatOperation(std::string name, int opValue): Operation(name, opValue) {};
 // };
 
+enum class OperationType {
+  R_TYPE,
+  I_TYPE,
+  J_TYPE,
+};
+
 #include "iostream"
 
 class Operation {
@@ -50,18 +56,23 @@ class Operation {
     std::string name;
     int opValue;
     int functValue;
+    OperationType type;
     int mode;
 
   public:
     Operation() {};
-    Operation(std::string name, int opValue) {
+    Operation(std::string name, int opValue, OperationType type, int mode) {
       this->name = name;
       this->opValue = opValue;
+      this->type = type;
+      this->mode = mode;
     };
-    Operation(std::string name, int opValue, int functValue) {
+    Operation(std::string name, int opValue, int functValue, OperationType type, int mode) {
       this->name = name;
       this->opValue = opValue;
       this->functValue = functValue;
+      this->type = type;
+      this->mode = mode;
     }
     std::string getName() {
       return this->name;
@@ -71,5 +82,11 @@ class Operation {
     }
     int getFunctValue() {
       return this->functValue;
+    }
+    OperationType getType() {
+      return this->type;
+    }
+    int getMode() {
+      return this->mode;
     }
 };
