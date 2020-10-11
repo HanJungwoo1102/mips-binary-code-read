@@ -10,7 +10,13 @@ class MIPSBinaryCodeDisassembler {
 		static std::string getHexString(int i) {
 			std::stringstream s;
 			s << std::hex << i;
-			return s.str();
+			std::string hexString = s.str();
+
+			while(hexString.size() < 8) {
+				hexString = "0" + hexString;
+			}
+
+			return hexString;
 		}
 
 	public:

@@ -49,22 +49,27 @@ class Operation {
   private:
     std::string name;
     int opValue;
-    int funct;
+    int functValue;
+    int mode;
+
   public:
     Operation() {};
     Operation(std::string name, int opValue) {
       this->name = name;
       this->opValue = opValue;
     };
-    Operation(std::string name, int opValue, int funct) {
+    Operation(std::string name, int opValue, int functValue) {
       this->name = name;
       this->opValue = opValue;
-      this->funct = funct;
+      this->functValue = functValue;
     }
     std::string getName() {
       return this->name;
     };
     int getOpValue() {
       return this->opValue;
+    }
+    int getFunctValue() {
+      return this->functValue;
     }
 };

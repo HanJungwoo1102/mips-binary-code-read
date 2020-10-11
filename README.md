@@ -41,7 +41,8 @@
 - slti
 - sltiu
 - sw
-
+00000000 / 00011111 / 00000111 / 11000000 /
+[][][][]
 ## J Format Instruction
 - j
 - jal

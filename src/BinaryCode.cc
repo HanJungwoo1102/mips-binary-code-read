@@ -1,5 +1,5 @@
 #include "BinaryCode.h"
-
+#include <iostream>
 BinaryCode::BinaryCode() {
 
 };
@@ -10,10 +10,6 @@ std::vector<int>::iterator BinaryCode::getInstructionIterator() {
 
 std::vector<int>::iterator BinaryCode::getLastInstructionIterator() {
     return this->binaryCode.end();
-}
-
-int BinaryCode::getLength() {
-    return this->binaryCode.size();
 }
 
 void BinaryCode::pushInstruction(int instruction) {

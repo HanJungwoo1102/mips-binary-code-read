@@ -1,18 +1,31 @@
 #include "FileManager.h"
 
 BinaryCode* FileManager::readBinFile(char* fileName) {
-    std::ifstream inFile(fileName, std::ifstream::binary);
-
+    std::ifstream inFile(fileName, std::ifstream::binary|std::ifstream::ate);
+    int idx = 0;
     if (inFile.is_open()) {
         BinaryCode* binaryCode = new BinaryCode();
 
-        while(!inFile.eof()) {
+        char* buffer;
+        long size = inFile.tellg();
+        inFile.seekg(0, std::ifstream::beg);
+
+        buffer = new char[size];
+
+        inFile.read(buffer, size);
+        inFile.close();
+
+        for(int index = 0; index < size / 4; index++) {
             int instruction;
-            inFile.read((char *) &instruction, sizeof(int));
+
+            char* is = (char *) &instruction;
+
+            for (int i = 0; i < 4; i++) {
+                is[3 - i] = buffer[index * 4 + i];
+            }
+
             binaryCode->pushInstruction(instruction);
         }
-
-        inFile.close();
         return binaryCode;
     } else {
         throw;
