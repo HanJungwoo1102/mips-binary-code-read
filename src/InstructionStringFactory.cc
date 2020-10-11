@@ -1,6 +1,5 @@
 #include "InstructionStringFactory.h"
 
-
 std::array<Operation, R_FORMAT_OPERATION_SIZE> InstructionStringFactory::rFormatOperationArray = {
 	Operation("add", 0, 2),
 	Operation("add", 0, 2),

@@ -16,7 +16,9 @@ DisassembledData* MIPSBinaryCodeDisassembler::disassemble(BinaryCode* binaryCode
 
 		int instruction = *iterator;
 
-		instructionString = instructionString + std::to_string(instruction) + " ";
+		std::string hexString = MIPSBinaryCodeDisassembler::getHexString(instruction);
+
+		instructionString = instructionString + hexString + " ";
 	
 		std::string is = InstructionStringFactory::createInstructionString(instruction);
 
