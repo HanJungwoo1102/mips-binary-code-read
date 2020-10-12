@@ -14,6 +14,10 @@ class InstructionStringFactory {
     static std::string getRFormatInstructionString0(std::string operationName, int rs, int rt, int rd, int shamt);
     static std::string getRFormatInstructionString1(std::string operationName, int rs, int rt, int rd, int shamt);
     static std::string getRFormatInstructionString2(std::string operationName, int rs, int rt, int rd, int shamt);
+    static std::string getRFormatInstructionString3(std::string operationName, int rs, int rt, int rd, int shamt);
+    static std::string getRFormatInstructionString4(std::string operationName, int rs, int rt, int rd, int shamt);
+    static std::string getRFormatInstructionString5(std::string operationName, int rs, int rt, int rd, int shamt);
+    static std::string getRFormatInstructionString6(std::string operationName, int rs, int rt, int rd, int shamt);
 
     static std::string getIFormatInstructionString(std::string operationName, int rs, int rt, int immediate);
     static std::string getIFormatInstructionString0(std::string operationName, int rs, int rt, int immediate);

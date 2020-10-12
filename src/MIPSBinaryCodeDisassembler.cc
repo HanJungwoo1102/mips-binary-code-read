@@ -1,16 +1,15 @@
 #include "MIPSBinaryCodeDisassembler.h"
 
 DisassembledData* MIPSBinaryCodeDisassembler::disassemble(BinaryCode* binaryCode) {
-	std::cout << std::endl;
-	DisassembledData* disassembledData = NULL;
-
 	std::vector<int>::iterator iterator = binaryCode->getInstructionIterator();
 	std::vector<int>::iterator lastIterator = binaryCode->getLastInstructionIterator();
 
 	int index = 0;
 
+	std::string instructionString = "";
+
 	for (; iterator != lastIterator ; ++iterator) {
-		std::string instructionString = "inst " + std::to_string(index++) + ": ";
+		instructionString = instructionString + "inst " + std::to_string(index++) + ": ";
 
 		int instruction = *iterator;
 
@@ -20,10 +19,11 @@ DisassembledData* MIPSBinaryCodeDisassembler::disassemble(BinaryCode* binaryCode
 	
 		std::string is = InstructionStringFactory::createInstructionString(instruction);
 
-		instructionString = instructionString + is;
+		instructionString = instructionString + is + "\n";
 
-		std::cout << instructionString << std::endl;
 	}
+
+	DisassembledData* disassembledData = new DisassembledData(instructionString);
 
 	return disassembledData;
 };
