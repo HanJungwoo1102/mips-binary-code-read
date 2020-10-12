@@ -1,5 +1,5 @@
-*.bin
-*.txt
+/*.bin
+/*.txt
 /.vscode
 *.o
 mips_sim

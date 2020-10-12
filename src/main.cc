@@ -25,14 +25,25 @@ int main(int argc, char **argv) {
             std::cout << " - (fail)" << std::endl;
             return 0;
         }
-        std::cout << "[3] Write a file" << std::endl;
+
+        std::string binFileNameString = std::string(binFileName);
+        int extensionIndex = binFileNameString.find(".bin");
+        std::string txtFileNameString = binFileNameString.replace(extensionIndex, 4, ".txt");
+        char * txtFileName = new char[txtFileNameString.size() + 1];
+        std::copy(txtFileNameString.begin(), txtFileNameString.end(), txtFileName);
+        txtFileName[txtFileNameString.size()] = '\0'; // 스트링 끝에 0을 추가해주는 거 잊지 마세요
+
+        std::cout << "[3] Write: " << txtFileName << std::endl;
+
         try {
-            FileManager::writeTxtFile("test.txt", disassembledData);
+            FileManager::writeTxtFile(txtFileName, disassembledData);
             std::cout << " - (success)" << std::endl;
         } catch(int error) {
             std::cout << " - (fail)" << std::endl;
             return 0;
         }
+
+        delete[] txtFileName;
         
         std::cout << "Success!!" << std::endl;
     } else {
