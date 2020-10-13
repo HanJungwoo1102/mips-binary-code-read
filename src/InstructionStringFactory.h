@@ -8,7 +8,7 @@ class InstructionStringFactory {
   private:
     static std::array<Operation, OPERATION_SIZE> operationArray;
 
-    static Operation* getOperation(int instruction);
+    static int getOperation(int instruction);
 
     static std::string getRFormatInstructionString(std::string operationName, int rs, int rt, int rd, int shamt);
     static std::string getRFormatInstructionString0(std::string operationName, int rs, int rt, int rd, int shamt);

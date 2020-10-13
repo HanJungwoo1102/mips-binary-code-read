@@ -70,7 +70,9 @@ std::string InstructionStringFactory::createInstructionString(int instruction) {
 	int funct = InstructionStringFactory::getFunct(instruction);
 
 	Operation* operation = NULL;
-	operation = InstructionStringFactory::getOperation(instruction);
+	int idx = InstructionStringFactory::getOperation(instruction);
+	Operation* operationArray = InstructionStringFactory::operationArray.data();
+	operation = &operationArray[idx++];
 
 	if (operation != NULL) {
 		OperationType operationType = operation->getType();
@@ -125,7 +127,7 @@ std::string InstructionStringFactory::createInstructionString(int instruction) {
 	return "unknown instruction";
 };
 
-Operation* InstructionStringFactory::getOperation(int instruction) {
+int InstructionStringFactory::getOperation(int instruction) {
 	Operation* operationArray = InstructionStringFactory::operationArray.data();
 	std::array<Operation, OPERATION_SIZE>::iterator iterator = InstructionStringFactory::operationArray.begin();
 	std::array<Operation, OPERATION_SIZE>::iterator endIterator = InstructionStringFactory::operationArray.end();
@@ -136,10 +138,10 @@ Operation* InstructionStringFactory::getOperation(int instruction) {
 		if (operation.getOpValue() == InstructionStringFactory::getOp(instruction)) {
 			if (operation.getType() == OperationType::R_TYPE) {
 				if (operation.getFunctValue() == InstructionStringFactory::getFunct(instruction)) {
-					return &operation;
+					return index;
 				}
 			} else {
-				return &operation;
+				return index;
 			}
 		}
 	}
