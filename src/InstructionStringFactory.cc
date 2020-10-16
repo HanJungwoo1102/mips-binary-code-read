@@ -72,7 +72,7 @@ std::string InstructionStringFactory::createInstructionString(int instruction) {
 	Operation* operation = NULL;
 	int idx = InstructionStringFactory::getOperation(instruction);
 	Operation* operationArray = InstructionStringFactory::operationArray.data();
-	operation = &operationArray[idx++];
+	operation = &operationArray[idx];
 
 	if (operation != NULL) {
 		OperationType operationType = operation->getType();
@@ -134,7 +134,7 @@ int InstructionStringFactory::getOperation(int instruction) {
 
 	int index = 0;
 	for(; iterator != endIterator; iterator++) {
-		Operation operation = operationArray[index++];
+		Operation operation = operationArray[index];
 		if (operation.getOpValue() == InstructionStringFactory::getOp(instruction)) {
 			if (operation.getType() == OperationType::R_TYPE) {
 				if (operation.getFunctValue() == InstructionStringFactory::getFunct(instruction)) {
@@ -144,6 +144,7 @@ int InstructionStringFactory::getOperation(int instruction) {
 				return index;
 			}
 		}
+		index += 1;
 	}
 	return NULL;
 }
