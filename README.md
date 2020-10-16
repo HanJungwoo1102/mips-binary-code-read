@@ -49,8 +49,8 @@
 
 ##
 - sllr
-- lbu
-- lh
-- lhu
-- sh
-- xori
+- lbu100100
+- lh100001
+- lhu100101
+- sh101001
+- xori001110
