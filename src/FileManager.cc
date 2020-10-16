@@ -35,8 +35,6 @@ BinaryCode* FileManager::readBinFile(char* fileName) {
 void FileManager::writeTxtFile(char* fileName, DisassembledData* disassembledData) {
     std::string text = disassembledData->getDisassembledDataString();
 
-    std::cout << text << std::endl;
-
     std::ofstream outFile(fileName);
 
     if (outFile.is_open()) {

@@ -33,7 +33,7 @@ int main(int argc, char **argv) {
         std::copy(txtFileNameString.begin(), txtFileNameString.end(), txtFileName);
         txtFileName[txtFileNameString.size()] = '\0'; // 스트링 끝에 0을 추가해주는 거 잊지 마세요
 
-        std::cout << "[3] Write: " << txtFileName << std::endl;
+        std::cout << "[3] Write: " << txtFileName;
 
         try {
             FileManager::writeTxtFile(txtFileName, disassembledData);
