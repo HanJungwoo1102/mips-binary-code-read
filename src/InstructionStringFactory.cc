@@ -4,12 +4,13 @@
 /*
 	mode9: rs rt rd shamt
 	mode0: $3, $1, $2
-	mode1: $3, $1, 4
+	mode1: $3, $2, 4
 	mode2: $1
 	mode3: $1, $2
 	mode4: $3
 	mode5:
 	mode6: $3, $2, $1
+	mode7: $3, $1
 */
 
 // itype
@@ -22,45 +23,45 @@
 
 std::array<Operation, OPERATION_SIZE> InstructionStringFactory::operationArray = {
 	Operation("add", 0, 0B100000, OperationType::R_TYPE, 0),
-	Operation("addu", 0, 0B100001, OperationType::R_TYPE, 9),
-	Operation("and", 0, 0B100100, OperationType::R_TYPE, 9),
-	Operation("nor", 0, 0B100111, OperationType::R_TYPE, 9),
+	Operation("addu", 0, 0B100001, OperationType::R_TYPE, 0),
+	Operation("and", 0, 0B100100, OperationType::R_TYPE, 0),
+	Operation("nor", 0, 0B100111, OperationType::R_TYPE, 0),
 	Operation("or", 0, 0B100101, OperationType::R_TYPE, 0),
-	Operation("sll", 0, 0B000000, OperationType::R_TYPE, 1),
-	Operation("slt", 0, 0B101010, OperationType::R_TYPE, 9),
-	Operation("sltu", 0, 0B101011, OperationType::R_TYPE, 9),
-	Operation("srl", 0, 0B000010, OperationType::R_TYPE, 9),
-	Operation("sub", 0, 0B100010, OperationType::R_TYPE, 9),
+	Operation("xor", 0, 0B100110, OperationType::R_TYPE, 0),
+	Operation("sub", 0, 0B100010, OperationType::R_TYPE, 0),
 	Operation("subu", 0, 0B100011, OperationType::R_TYPE, 0),
-	Operation("div", 0, 0B011010, OperationType::R_TYPE, 3),
-	Operation("divu", 0, 0B011011, OperationType::R_TYPE, 9),
+	Operation("sll", 0, 0B000000, OperationType::R_TYPE, 1),
+	Operation("slt", 0, 0B101010, OperationType::R_TYPE, 1),
+	Operation("sltu", 0, 0B101011, OperationType::R_TYPE, 1),
+	Operation("srl", 0, 0B000010, OperationType::R_TYPE, 1),
 	Operation("jr", 0, 0B001000, OperationType::R_TYPE, 2),
-	Operation("jalr", 0, 0B001001, OperationType::R_TYPE, 9),
-	Operation("mfhi", 0, 0B010000, OperationType::R_TYPE, 9),
+	Operation("mfhi", 0, 0B010000, OperationType::R_TYPE, 2),
 	Operation("mthi", 0, 0B010001, OperationType::R_TYPE, 2),
-	Operation("mflo", 0, 0B010010, OperationType::R_TYPE, 4),
-	Operation("mtlo", 0, 0B010011, OperationType::R_TYPE, 9),
+	Operation("div", 0, 0B011010, OperationType::R_TYPE, 3),
+	Operation("divu", 0, 0B011011, OperationType::R_TYPE, 3),
 	Operation("mult", 0, 0B011000, OperationType::R_TYPE, 3),
-	Operation("multu", 0, 0B011001, OperationType::R_TYPE, 9),
-	Operation("sra", 0, 0B000011, OperationType::R_TYPE, 9),
-	Operation("srav", 0, 0B000111, OperationType::R_TYPE, 6),
-	Operation("srlv", 0, 0B000110, OperationType::R_TYPE, 9),
+	Operation("multu", 0, 0B011001, OperationType::R_TYPE, 3),
+	Operation("mflo", 0, 0B010010, OperationType::R_TYPE, 4),
+	Operation("mtlo", 0, 0B010011, OperationType::R_TYPE, 4),
 	Operation("syscall", 0, 0B001100, OperationType::R_TYPE, 5),
-	Operation("xor", 0, 0B100110, OperationType::R_TYPE, 9),
-	Operation("addi", 0B001000, OperationType::I_TYPE, 1),
-	Operation("addiu", 0B001001, OperationType::I_TYPE, 1),
-	Operation("andi", 0B001100, OperationType::I_TYPE, 9),
-	Operation("beq", 0B000100, OperationType::I_TYPE, 2),
-	Operation("bne", 0B000101, OperationType::I_TYPE, 2),
-	Operation("lui", 0B001111, OperationType::I_TYPE, 3),
-	Operation("lw", 0B100011, OperationType::I_TYPE, 0),
-	Operation("sh", 0B101001, OperationType::I_TYPE, 0),
-	Operation("ori", 0B001101, OperationType::I_TYPE, 9),
-	Operation("slti", 0B001010, OperationType::I_TYPE, 1),
-	Operation("sltiu", 0B001011, OperationType::I_TYPE, 9),
+	Operation("sra", 0, 0B000011, OperationType::R_TYPE, 6),
+	Operation("srav", 0, 0B000111, OperationType::R_TYPE, 6),
+	Operation("srlv", 0, 0B000110, OperationType::R_TYPE, 6),
+	Operation("jalr", 0, 0B001001, OperationType::R_TYPE, 7),
 	Operation("sw", 0B101011, OperationType::I_TYPE, 0),
 	Operation("sb", 0B101000, OperationType::I_TYPE, 0),
 	Operation("lb", 0B100000, OperationType::I_TYPE, 0),
+	Operation("lw", 0B100011, OperationType::I_TYPE, 0),
+	Operation("sh", 0B101001, OperationType::I_TYPE, 0),
+	Operation("addi", 0B001000, OperationType::I_TYPE, 1),
+	Operation("addiu", 0B001001, OperationType::I_TYPE, 1),
+	Operation("andi", 0B001100, OperationType::I_TYPE, 1),
+	Operation("ori", 0B001101, OperationType::I_TYPE, 1),
+	Operation("slti", 0B001010, OperationType::I_TYPE, 1),
+	Operation("sltiu", 0B001011, OperationType::I_TYPE, 1),
+	Operation("beq", 0B000100, OperationType::I_TYPE, 2),
+	Operation("bne", 0B000101, OperationType::I_TYPE, 2),
+	Operation("lui", 0B001111, OperationType::I_TYPE, 3),
 	Operation("j", 0B000010, OperationType::J_TYPE, 0),
 	Operation("jal", 0B000011, OperationType::J_TYPE, 0),
 };
@@ -95,6 +96,8 @@ std::string InstructionStringFactory::createInstructionString(int instruction) {
 				return InstructionStringFactory::getRFormatInstructionString5(operationName, rs, rt, rd, shamt);
 			} else if (mode == 6) {
 				return InstructionStringFactory::getRFormatInstructionString6(operationName, rs, rt, rd, shamt);
+			} else if (mode == 7) {
+				return InstructionStringFactory::getRFormatInstructionString7(operationName, rs, rt, rd, shamt);
 			} else {
 				return InstructionStringFactory::getRFormatInstructionString(operationName, rs, rt, rd, shamt);
 			}
@@ -213,8 +216,17 @@ std::string InstructionStringFactory::getRFormatInstructionString6(std::string o
 	std::string instructionString =
 		operationName
 		+ " $" + std::to_string(rd)
-		+ " $" + std::to_string(rt)
-		+ " $" + std::to_string(rs);
+		+ ", $" + std::to_string(rt)
+		+ ", $" + std::to_string(rs);
+
+	return instructionString;
+};
+
+std::string InstructionStringFactory::getRFormatInstructionString7(std::string operationName, int rs, int rt, int rd, int shamt) {
+	std::string instructionString =
+		operationName
+		+ " $" + std::to_string(rd)
+		+ ", $" + std::to_string(rs);
 
 	return instructionString;
 };
